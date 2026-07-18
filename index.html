@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Made For Dela Silvira 🎁</title>
+    <title>Made For Anita 🎁</title>
     <meta name="language" content="zh-CN">
     <meta name="description" content="Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!">
 
@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="image/logo.png">
 
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Made For Dela Silvira 🎁">
+    <meta property="og:title" content="Made For Anita 🎁">
     <meta property="og:description"
         content="Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!">
     <meta property="og:image" content="https://happybirthdaydeargift.vercel.app/image/logo.png">
@@ -22,7 +22,7 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Made For Dela Silvira 🎁">
+    <meta name="twitter:title" content="Made For Anita 🎁">
     <meta name="twitter:description"
         content="Một món quà đầy yêu thương đang chờ bạn khám phá! Nhấn để xem lời chúc đặc biệt!">
     <meta name="twitter:image" content="https://happybirthdaydeargift.vercel.app/image/birthday-gift.jpg">
@@ -169,7 +169,7 @@
                         <h3 data-i18n="matrix">🌧️ Cài Đặt Hiệu Ứng Mưa Chữ</h3>
                         <div class="form-group">
                             <label for="matrixText" data-i18n="matrixText">chữ chính mưa chữ:</label>
-                            <input type="text" id="matrixText" value="DELASILVIRA"
+                            <input type="text" id="matrixText" value="HAPPYBIRTHDAY"
                                 placeholder="Nhập chữ cho hiệu ứng mưa chữ" data-i18n-placeholder="matrixText">
                         </div>
                         <div class="form-group">
@@ -213,7 +213,7 @@
                                 style="color: rgb(132, 132, 132); font-weight: normal; font-size: 12px; display: block; margin-bottom: 5px;">
                                 lưu ý: hãy ngăn cách bằng dấu | để tách từ, không nên để một dòng quá dài
                             </span>
-                            <input type="text" id="sequenceText" value="HAPPY|BIRTHDAY|DELA|SILVIRA|MY|CUTE|GIRL|❤"
+                            <input type="text" id="sequenceText" value="HAPPY|BIRTHDAY|MY|CUTEE|LITTLE|SWARALI|❤"
                                 placeholder="Ví dụ: CHÚC|MỪNG|SINH|NHẬT|..." data-i18n-placeholder="sequenceText">
                         </div>
                         <div class="form-group" id="sequenceColorSection" style="display: none;">
@@ -333,22 +333,14 @@
                 interval: '100',
             });
         </script>
-        
-        <!-- Panggil Bahasa dan Pengaturan Dasar -->
         <script src="lang.js"></script>
         <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
-        
-        <!-- Script bypass tiruan agar file main.js & ui.js tidak error mencari fungsi -->
-        <script>
-            // Membuat fungsi kosong agar tidak dianggap error/missing oleh sistem pelindung
-            window.auth = { onAuthStateChanged: function(cb) { cb(null); } };
-            window.api = { getSettings: function() { return null; } };
-        </script>
-
-        <!-- Panggil file inti pembentuk animasi web kamu -->
+        <script src="jscp/api.obf.js"></script>
+        <script src="jscp/auth.obf.js"></script>
+        <script src="jscp/voucher.obf.js"></script>
         <script src="jscp/settings.js"></script>
         <script src="jscp/main.js"></script>
         <script src="jscp/ui.js"></script>
 </body>
 
-</html>
+                                        </html>
