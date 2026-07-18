@@ -40,7 +40,7 @@
         EN/VI
     </button>
     
-    <!-- Google Login Button (Sistem dimatikan biar ga ribet login) -->
+    <!-- Google Login Container -->
     <div id="googleAuthContainer" style="display: none; position: fixed; top: 20px; left: 20px; z-index: 10003; font-family: Arial, sans-serif;">
         <button id="googleLoginBtn" style="display: flex; align-items: center; padding: 8px 12px; background: none; border: 1px solid #dadce0; border-radius: 24px; font-size: 14px; font-weight: 500; color: #3c4043; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
             <svg width="18" height="18" viewBox="0 0 24 24">
@@ -57,212 +57,7 @@
                 <div id="userName" style="font-weight: 500; color: #ffffff;"></div>
                 <div id="userEmail" style="font-size: 12px; color: #ffffff;"></div>
             </div>
-            <button id="logoutBtn" style="padding: 4px 8px; background: none; border: 1px solid #dadce0; border-radius: 4px; font-size: 12px; cursor: pointer; color: #fbfbfc;" data-i18n="logout">Logout Dulu</button>
-        </div>
-    </div>
-
-    <canvas id="matrix-rain" style="display: none;"></canvas>
-    <canvas style="position:absolute;width:100%;height:100%;z-index:9999;display:none;" class="canvas"></canvas>
-    <div class="overlay">
-        <div class="stars-container" id="starsContainer"></div>
-        <img id="gift-image" src="image/happy3.gif" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-width: 80%; max-height: 80%;" />
-        <div class="content-display" id="contentDisplay">
-            <p id="contentText"></p>
-        </div>
-        <div class="firework-container" id="fireworkContainer"></div>
-        <div class="book-container">
-            <div class="book" id="book"></div>
-        </div>
-
-        <button class="music-control" id="musicControl" title="Play/Pause Music">▶</button>
-        <button class="settings-button" id="settingsButton" title="Settings" style="display: none;">⚙</button>
-
-        <!-- Settings hint element -->
-        <div id="settingsHint" class="settings-hint">
-            <div class="hint-text" data-i18n="settingsHint" style="display: none;">Klik di sini kalau kamu mau ganti-ganti settingannya ya~</div>
-        </div>
-
-        <div id="settingsModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 data-i18n="settings">⚙️ Atur Sesuai Maumu</h2>
-                    <span class="close">×</span>
-                </div>
-                <div class="modal-body">
-                    <div class="settings-section">
-                        <h3 data-i18n="music">🎵 Pilih Backsound</h3>
-                        <div class="form-group">
-                            <label for="backgroundMusic" data-i18n="backgroundMusic">Musiknya mau yang mana:</label>
-                            <div class="music-select-row">
-                                <select id="backgroundMusic">
-                                    <option value="" disabled selected>Bentar, lagi loading lagunya...</option>
-                                </select>
-                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Coba Denger</button>
-                            </div>
-                            <span id="musicPreviewStatus" class="music-preview-status">Pilih dulu lagunya baru klik "Coba Denger"</span>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="countdown">⏰ Waktu Hitung Mundur</h3>
-                        <div class="form-group">
-                            <label for="countdownTime" data-i18n="countdownTime">Mau berapa detik countdown-nya:</label>
-                            <select id="countdownTime">
-                                <option value="3" data-i18n="sec3">3 Detik aja</option>
-                                <option value="5" data-i18n="sec5">5 Detik</option>
-                                <option value="10" data-i18n="sec10">10 Detik biar deg-degan</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="matrix">🌧️ Efek Ujan Tulisan</h3>
-                        <div class="form-group">
-                            <label for="matrixText" data-i18n="matrixText">Tulisan yang mau di-ujanin:</label>
-                            <input type="text" id="matrixText" value="DELASILVIRA" placeholder="Ketik nama atau kata bebas" data-i18n-placeholder="matrixText">
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="colorTheme">Pilih Vibes Warna Websitenya:</label>
-                            <div class="color-theme-buttons">
-                                <button type="button" class="color-theme-btn active" data-theme="pink">
-                                    <div class="color-preview pink-preview"></div>
-                                    <span data-i18n="pinkTheme">Pink Lucu</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="blue">
-                                    <div class="color-preview blue-preview"></div>
-                                    <span data-i18n="blueTheme">Biru Adem</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="purple">
-                                    <div class="color-preview purple-preview"></div>
-                                    <span data-i18n="purpleTheme">Ungu Santai</span>
-                                </button>
-                                <button type="button" class="color-theme-btn" data-theme="custom">
-                                    <div class="color-preview custom-preview"></div>
-                                    <span data-i18n="customTheme">Custom Sendiri</span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-row" id="customColorSection" style="display: none;">
-                            <div class="form-group">
-                                <label for="matrixColor1" data-i18n="matrixColor1">Maju Warna 1:</label>
-                                <input type="color" id="matrixColor1" value="#ff69b4">
-                            </div>
-                            <div class="form-group">
-                                <label for="matrixColor2" data-i18n="matrixColor2">Maju Warna 2:</label>
-                                <input type="color" id="matrixColor2" value="#ff1493">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="sequence">✨ Atur Teks Utama</h3>
-                        <div class="form-group">
-                            <label for="sequenceText" data-i18n="sequenceText">Isi Teks Tengah Layar:</label>
-                            <span data-i18n="noteSequence" style="color: rgb(132, 132, 132); font-weight: normal; font-size: 12px; display: block; margin-bottom: 5px;">
-                                Info: Jangan lupa pisahin kata pake tanda | biar posisinya pas di layar dan ga kepanjangan.
-                            </span>
-                            <input type="text" id="sequenceText" value="HAPPY|BIRTHDAY|DELA|SILVIRA|MY|CUTE|GIRL|❤" placeholder="Contoh: SELAMAT|ULANG|TAHUN|SAYANG|..." data-i18n-placeholder="sequenceText">
-                        </div>
-                        <div class="form-group" id="sequenceColorSection" style="display: none;">
-                            <label for="sequenceColor" data-i18n="sequenceColor">Warna Teksnya:</label>
-                            <input type="color" id="sequenceColor" value="#ff69b4">
-                        </div>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3 data-i18n="gift">🎁 Animasi GIF</h3>
-                        <div class="form-group">
-                            <label for="giftImage" data-i18n="giftImage">Mau pake gambar gerak apa (Bebas):</label>
-                            <select id="giftImage">
-                                <option value="" data-i18n="noGif">Skip aja / Ga usah</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="enableBook" data-i18n="enableBook">Munculin Buku Ceritanya?</label>
-                        <select id="enableBook">
-                            <option value="true" data-i18n="on">Mau</option>
-                            <option value="false" data-i18n="off">Gausah deh</option>
-                        </select>
-                    </div>
-                    <div class="settings-section" id="bookSettingsSection">
-                        <h3 data-i18n="book">📖 Isi Halaman Buku</h3>
-                        <div id="pageConfigs"></div>
-                        <div class="form-group">
-                            <label for="enableHeart" data-i18n="enableHeart">Efek Animasi Love berterbangan:</label>
-                            <select id="enableHeart">
-                                <option value="true" data-i18n="on">Nyalain</option>
-                                <option value="false" data-i18n="off">Matiin</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group" style="display:none;">
-                        <label for="isSave" data-i18n="isSave">Lưu QR vĩnh viễn:</label>
-                        <input type="checkbox" id="isSave" style="margin-left: 10px;">
-                    </div>
-                    <div class="settings-p" style="margin-bottom: 12px; background: #fff8e1; color: #b26a00; border-radius: 7px; padding: 10px 14px; font-size: 15px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);">
-                        <div class="settings-p" style="margin-bottom: 4px;">
-                            ⏳ <b>Notes:</b> Link-nya disimpan baik-baik ya jangan sampe ilang!
-                        </div>
-                        <div data-i18n="followNote" class="settings-p">
-                            🥰 Dibuat dengan sepenuh hati khusus buat kamu!
-                        </div>
-                    </div>
-                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Oke, Simpan & Terapkan!</button>
-                </div>
-            </div>
-        </div>
-
-        <audio id="birthdayAudio" loop>
-            <source src="music/happybirtday_uia.mp3" type="audio/mpeg">
-            Yah, hp kamu ga support buat putar musiknya nih.
-        </audio>
-
-        <div id="orientation-lock">
-            <div class="phone-icon">
-                <img src="image/screen.png" alt="">
-            </div>
-        </div>
-        
-        <!-- Modal Payment (Disembunyikan total biar ga ganggu jalan web) -->
-        <div id="paymentModal" style="display:none;"></div>
-        
-        <!-- Nút Full màn hình -->
-        <button id="fullscreenBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 990010; padding: 10px 18px; border-radius: 8px; border: none; background: #222; color: #fff; font-size: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; display: none;">
-            <img style="width: 20px; height: 20px; vertical-align: middle;" src="image/full.png" alt="">
-        </button>
-
-        <!-- Script utama pemanggil animasi tetap dipertahankan jalurnya -->
-        <script src="lang.js"></script>
-        <script src="jscp/settings.js"></script>
-        <script src="jscp/main.js"></script>
-        <script src="jscp/ui.js"></script>
-</body>
-
-</html>
-    <button id="langSwitchBtn"
-        style="display:none;top:20px;right:150px;z-index:10000004;padding:8px 16px;border-radius:8px;background:#fff;color:#222;border:1px solid #dadce0;cursor:pointer;">
-        ID/EN
-    </button>
-
-    <!-- Google Login Button -->
-    <div id="googleAuthContainer" style="display: none; position: fixed; top: 20px; left: 20px; z-index: 10003; font-family: Arial, sans-serif;">
-        <button id="googleLoginBtn" style="display: flex; align-items: center; padding: 8px 12px; background: none; border: 1px solid #dadce0; border-radius: 24px; font-size: 14px; font-weight: 500; color: #3c4043; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-            <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="#4285f4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                <path fill="#34a853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                <path fill="#fbbc05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                <path fill="#ea4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-            </svg>
-        </button>
-
-        <div id="userInfo" style="display: none; align-items: center; padding: 8px 12px; background: none; border: 1px solid #dadce0; border-radius: 24px; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <img id="userAvatar" style="width: 24px; height: 24px; border-radius: 50%; margin-right: 8px;">
-            <div style="margin-right: 12px;">
-                <div id="userName" style="font-weight: 500; color: #ffffff;"></div>
-                <div id="userEmail" style="font-size: 12px; color: #ffffff;"></div>
-            </div>
-            <button id="logoutBtn" style="padding: 4px 8px; background: none; border: 1px solid #dadce0; border-radius: 4px; font-size: 12px; cursor: pointer; color: #fbfbfc;" data-i18n="logout">Logout Dulu</button>
+            <button id="logoutBtn" style="padding: 4px 8px; background: none; border: 1px solid #dadce0; border-radius: 4px; font-size: 12px; cursor: pointer; color: #fbfbfc;" data-i18n="logout">Logout</button>
         </div>
     </div>
 
@@ -272,12 +67,11 @@
     <div class="overlay">
         <div class="stars-container" id="starsContainer"></div>
         <img id="gift-image" src="image/happy3.gif" style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-width: 80%; max-height: 80%;" />
-        
         <div class="content-display" id="contentDisplay">
             <p id="contentText"></p>
         </div>
-        
         <div class="firework-container" id="fireworkContainer"></div>
+        
         <div class="book-container">
             <div class="book" id="book"></div>
         </div>
@@ -287,51 +81,50 @@
 
         <!-- Settings hint element -->
         <div id="settingsHint" class="settings-hint">
-            <div class="hint-text" data-i18n="settingsHint" style="display: none;">Klik di sini kalau kamu mau ganti-ganti settingannya ya~</div>
+            <div class="hint-text" data-i18n="settingsHint" style="display: none;">Klik di sini buat atur settingan sesukamu~</div>
         </div>
 
-        <!-- Settings Modal -->
         <div id="settingsModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 data-i18n="settings">⚙️ Atur Sesuai Maumu</h2>
+                    <h2 data-i18n="settings">⚙️ Pengaturan Website</h2>
                     <span class="close">×</span>
                 </div>
                 <div class="modal-body">
                     <div class="settings-section">
-                        <h3 data-i18n="music">🎵 Pilih Backsound</h3>
+                        <h3 data-i18n="music">🎵 Pengaturan Musik</h3>
                         <div class="form-group">
-                            <label for="backgroundMusic" data-i18n="backgroundMusic">Musiknya mau yang mana:</label>
+                            <label for="backgroundMusic" data-i18n="backgroundMusic">Musik Latar:</label>
                             <div class="music-select-row">
                                 <select id="backgroundMusic">
-                                    <option value="" disabled selected>Bentar, lagi loading lagunya...</option>
+                                    <option value="" disabled selected>Lagi memuat daftar musik...</option>
                                 </select>
-                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Coba Denger</button>
+                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Tes Denger</button>
                             </div>
-                            <span id="musicPreviewStatus" class="music-preview-status">Pilih dulu lagunya baru klik "Coba Denger"</span>
+                            <span id="musicPreviewStatus" class="music-preview-status">Pilih lagu dulu terus klik "Tes Denger"</span>
                         </div>
                     </div>
 
                     <div class="settings-section">
-                        <h3 data-i18n="countdown">⏰ Waktu Hitung Mundur</h3>
+                        <h3 data-i18n="countdown">⏰ Waktu Mundur</h3>
                         <div class="form-group">
-                            <label for="countdownTime" data-i18n="countdownTime">Mau berapa detik countdown-nya:</label>
+                            <label for="countdownTime" data-i18n="countdownTime">Durasi Hitung Mundur:</label>
                             <select id="countdownTime">
-                                <option value="3" data-i18n="sec3">3 Detik aja</option>
+                                <option value="3" data-i18n="sec3">3 Detik</option>
                                 <option value="5" data-i18n="sec5">5 Detik</option>
-                                <option value="10" data-i18n="sec10">10 Detik biar deg-degan</option>
+                                <option value="10" data-i18n="sec10">10 Detik</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="settings-section">
-                        <h3 data-i18n="matrix">🌧️ Efek Ujan Tulisan</h3>
+                        <h3 data-i18n="matrix">🌧️ Efek Hujan Tulisan</h3>
                         <div class="form-group">
-                            <label for="matrixText" data-i18n="matrixText">Tulisan yang mau di-ujanin:</label>
-                            <input type="text" id="matrixText" value="DELASILVIRA" placeholder="Ketik nama atau kata bebas" data-i18n-placeholder="matrixText">
+                            <label for="matrixText" data-i18n="matrixText">Kata yang turun hujan:</label>
+                            <input type="text" id="matrixText" value="DELASILVIRA" placeholder="Masukkan nama atau kata-kata" data-i18n-placeholder="matrixText">
                         </div>
                         <div class="form-group">
-                            <label data-i18n="colorTheme">Pilih Vibes Warna Websitenya:</label>
+                            <label data-i18n="colorTheme">Pilih Warna Dasar:</label>
                             <div class="color-theme-buttons">
                                 <button type="button" class="color-theme-btn active" data-theme="pink">
                                     <div class="color-preview pink-preview"></div>
@@ -343,7 +136,7 @@
                                 </button>
                                 <button type="button" class="color-theme-btn" data-theme="purple">
                                     <div class="color-preview purple-preview"></div>
-                                    <span data-i18n="purpleTheme">Ungu Santai</span>
+                                    <span data-i18n="purpleTheme">Ungu Cantik</span>
                                 </button>
                                 <button type="button" class="color-theme-btn" data-theme="custom">
                                     <div class="color-preview custom-preview"></div>
@@ -353,82 +146,107 @@
                         </div>
                         <div class="form-row" id="customColorSection" style="display: none;">
                             <div class="form-group">
-                                <label for="matrixColor1" data-i18n="matrixColor1">Maju Warna 1:</label>
+                                <label for="matrixColor1" data-i18n="matrixColor1">Warna Hujan 1:</label>
                                 <input type="color" id="matrixColor1" value="#ff69b4">
                             </div>
                             <div class="form-group">
-                                <label for="matrixColor2" data-i18n="matrixColor2">Maju Warna 2:</label>
+                                <label for="matrixColor2" data-i18n="matrixColor2">Warna Hujan 2:</label>
                                 <input type="color" id="matrixColor2" value="#ff1493">
                             </div>
                         </div>
                     </div>
 
                     <div class="settings-section">
-                        <h3 data-i18n="sequence">✨ Atur Teks Utama</h3>
+                        <h3 data-i18n="sequence">✨ Pengaturan Teks Utama</h3>
                         <div class="form-group">
-                            <label for="sequenceText" data-i18n="sequenceText">Isi Teks Tengah Layar:</label>
+                            <label for="sequenceText" data-i18n="sequenceText">Isi Teks Utama:</label>
                             <span data-i18n="noteSequence" style="color: rgb(132, 132, 132); font-weight: normal; font-size: 12px; display: block; margin-bottom: 5px;">
-                                Info: Jangan lupa pisahin kata pake tanda | biar posisinya pas di layar dan ga kepanjangan.
+                                Catatan: Pisahkan per kata pakai tanda | supaya letaknya pas dan rapi di layar
                             </span>
                             <input type="text" id="sequenceText" value="HAPPY|BIRTHDAY|DELA|SILVIRA|MY|CUTE|GIRL|❤" placeholder="Contoh: SELAMAT|ULANG|TAHUN|SAYANG|..." data-i18n-placeholder="sequenceText">
                         </div>
                         <div class="form-group" id="sequenceColorSection" style="display: none;">
-                            <label for="sequenceColor" data-i18n="sequenceColor">Warna Teksnya:</label>
+                            <label for="sequenceColor" data-i18n="sequenceColor">Warna Teks Utama:</label>
                             <input type="color" id="sequenceColor" value="#ff69b4">
                         </div>
                     </div>
 
                     <div class="settings-section">
-                        <h3 data-i18n="gift">🎁 Animasi GIF</h3>
+                        <h3 data-i18n="gift">🎁 Gambar Bergerak (GIF)</h3>
                         <div class="form-group">
-                            <label for="giftImage" data-i18n="giftImage">Mau pake gambar gerak apa (Bebas):</label>
+                            <label for="giftImage" data-i18n="giftImage">Pilih Gambar Animasi:</label>
                             <select id="giftImage">
-                                <option value="" data-i18n="noGif">Skip aja / Ga usah</option>
+                                <option value="" data-i18n="noGif">Gak usah pakai</option>
                             </select>
                         </div>
                     </div>
-                    
                     <div class="form-group">
-                        <label for="enableBook" data-i18n="enableBook">Munculin Buku Ceritanya?</label>
+                        <label for="enableBook" data-i18n="enableBook">Tampilkan Buku Cerita?</label>
                         <select id="enableBook">
-                            <option value="true" data-i18n="on">Mau</option>
-                            <option value="false" data-i18n="off">Gausah deh</option>
+                            <option value="true" data-i18n="on">Buka</option>
+                            <option value="false" data-i18n="off">Tutup</option>
                         </select>
                     </div>
-
                     <div class="settings-section" id="bookSettingsSection">
-                        <h3 data-i18n="book">📖 Isi Halaman Buku</h3>
+                        <h3 data-i18n="book">📖 Isi Lembaran Buku</h3>
                         <div id="pageConfigs"></div>
                         <div class="form-group">
-                            <label for="enableHeart" data-i18n="enableHeart">Efek Animasi Love berterbangan:</label>
+                            <label for="enableHeart" data-i18n="enableHeart">Efek Animasi Love:</label>
                             <select id="enableHeart">
-                                <option value="true" data-i18n="on">Nyalain</option>
-                                <option value="false" data-i18n="off">Matiin</option>
+                                <option value="true" data-i18n="on">Nyalakan</option>
+                                <option value="false" data-i18n="off">Matikan</option>
                             </select>
                         </div>
                     </div>
-                    
-                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Oke, Simpan & Terapkan!</button>
+                    <div class="form-group" style="display: none;">
+                        <label for="isSave" data-i18n="isSave">Lưu QR vĩnh viễn:</label>
+                        <input type="checkbox" id="isSave" style="margin-left: 10px;">
+                    </div>
+                    <div class="settings-p" style="margin-bottom: 12px; background: #fff8e1; color: #b26a00; border-radius: 7px; padding: 10px 14px; font-size: 15px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);">
+                        <div class="settings-p" style="margin-bottom: 4px;">
+                            ⏳ <b>Notes:</b> Disimpan baik-baik ya link webnya biar ga ilang!
+                        </div>
+                        <div data-i18n="followNote" class="settings-p">
+                            🥰 Spesial dibuat dengan penuh cinta buat kamu!
+                        </div>
+                    </div>
+                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Simpan Pengaturan</button>
                 </div>
             </div>
         </div>
 
         <audio id="birthdayAudio" loop>
             <source src="music/happybirtday_uia.mp3" type="audio/mpeg">
-            Yah, hp kamu ga support buat putar musiknya nih.
         </audio>
 
         <div id="orientation-lock">
             <div class="phone-icon">
-                <img src="image/screen.png" alt="Miringin Layar">
+                <img src="image/screen.png" alt="">
             </div>
         </div>
-
-        <!-- Fullscreen Button -->
+        
+        <!-- Modal Payment Tersembunyi -->
+        <div id="paymentModal" style="display:none;"></div>
+        
+        <!-- Tombol Fullscreen -->
         <button id="fullscreenBtn" style="position: fixed; bottom: 20px; right: 20px; z-index: 990010; padding: 10px 18px; border-radius: 8px; border: none; background: #222; color: #fff; font-size: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.15); cursor: pointer; display: none;">
-            <img style="width: 20px; height: 20px; vertical-align: middle;" src="image/full.png" alt="Full Screen">
+            <img style="width: 20px; height: 20px; vertical-align: middle;" src="image/full.png" alt="">
         </button>
-    </div>
+
+        <!-- Panggil Bahasa dan Pengaturan Dasar -->
+        <script src="lang.js"></script>
+        
+        <!-- Script bypass tiruan agar file main.js & ui.js tidak error mencari fungsi -->
+        <script>
+            // Membuat fungsi kosong agar tidak dianggap error/missing oleh sistem
+            window.auth = { onAuthStateChanged: function(cb) { cb(null); } };
+            window.api = { getSettings: function() { return null; } };
+        </script>
+
+        <!-- Panggil file inti pembentuk animasi web kamu -->
+        <script src="jscp/settings.js"></script>
+        <script src="jscp/main.js"></script>
+        <script src="jscp/ui.js"></script>
 </body>
 
 </html>
